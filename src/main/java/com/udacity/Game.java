@@ -126,6 +126,7 @@ public class Game {
             grid[ai_i][ai_j] = 'o';
             //update free spots
             freeSpots--;
+
         }
         else{
             //change turns
@@ -153,24 +154,24 @@ public class Game {
         if(freeSpots<5){//win possible after 5 moves, 4 left
 
                 for(int i=0;i<3 && result != "X wins" && result != "O wins";i++){
-                    int winV=0,winH=0;//horizontal and vertical checking
+                    int winV=0,winH=0;//horizontal and vertical checking independent whose turn
                     int winL=0,winR=0;//left or right slant checking
                     for(int j=0;j<3;j++){
                         if(grid[i][j] == turn) winH++;//horizontal checking
                         if(grid[j][i] == turn) winV++;//vertical checking
 
                     }
-                    if(winV == 3 || winH ==3 ){
-                        if(turn == 'x') {result = "X wins";} else result = "O wins";
+                    if(winV == 3 || winH ==3 ){ //if 3 colected than result depends on turn
+                        if(turn == 'x') {result = "X wins";} else result = "O wins";//depends whose turn
                     }
                 }
-                if(result == "None" && grid[1][1] == turn){
-                    if((grid[0][2] == turn && grid[2][0] == turn) || (grid[0][0] == turn && grid[2][2] == turn)){
+                if(result == "None" && grid[1][1] == turn){ //middle area have to be 'turn' mark to check corners
+                    if((grid[0][2] == turn && grid[2][0] == turn) || (grid[0][0] == turn && grid[2][2] == turn)){//checking corners
                         if(turn == 'x') {result = "X wins";} else result = "O wins";
                     }
 
                 }
-                if(result == "None" && freeSpots == 0)result = "Tie";
+                if(result == "None" && freeSpots == 0)result = "Tie"; //chcecking Tie after win checking
 
         }
 
